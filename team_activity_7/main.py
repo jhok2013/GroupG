@@ -4,13 +4,13 @@ Date: 10/27/2020
 Version: 1.0.0
 '''
 
-from sys import path
-from pathlib import Path
+# Import third party libraries
 
-path.insert(0, str(Path('../..').resolve()))
+from EmployeeSystem import EmployeeSystem
 
 def main():
-    pass
+    employee_system: EmployeeSystem = EmployeeSystem()
+    employee_system.cmdloop()
 
 if __name__ == '__main__':
     main()
