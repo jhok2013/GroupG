@@ -43,6 +43,13 @@ class Employee(ABC):
         '''
         pass
 
+    @abstractmethod
+    def get_paycheck(self) -> Union[float, int]:
+        '''
+
+        '''
+        pass
+
 class HourlyEmployee(Employee):
     '''
     Represents an HourlyEmployee. Extends the Employee class.
@@ -59,6 +66,7 @@ class HourlyEmployee(Employee):
     '''
 
     hourly_wage: Union[float, int]
+    hours: Union[float, int]
 
     def __init__(self) -> None:
         '''
@@ -66,11 +74,18 @@ class HourlyEmployee(Employee):
         '''
         super().__init__()
         self.hourly_wage = 0.00
+        self.hours = 0.00
     
     def display(self):
         print(
-            f"{self.name} - ${self.hourly_wage:.2f}/hour"
+            f"{self.name} - ${self.hourly_wage:.2f}/hour - Paycheck: ${self.get_paycheck():.2f}"
         )
+    
+    def get_paycheck(self) -> Union[float, int]:
+        '''
+
+        '''
+        return self.hourly_wage * self.hours
 
 class SalaryEmployee(Employee):
     '''
@@ -101,5 +116,11 @@ class SalaryEmployee(Employee):
 
         '''
         print(
-            f"{self.name} - ${self.salary:.2f}/year"
+            f"{self.name} - ${self.salary:.2f}/year - Paycheck: ${self.get_paycheck():.2f}"
         )
+    
+    def get_paycheck(self) -> Union[float, int]:
+        '''
+
+        '''
+        return self.salary / 24
