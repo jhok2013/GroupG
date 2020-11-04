@@ -8,7 +8,7 @@ import unittest
 path.insert(0, str(Path('C:\projects').resolve()))
 
 # 3rd party imports
-from GroupG.team_activity_8.timeObject.Time import Time
+from GroupG.team_activity_8.timeObject.Time import Time #type: ignore
 
 class test_time(unittest.TestCase):
     '''
@@ -55,6 +55,19 @@ class test_time(unittest.TestCase):
         self.time.hours = zero_hours
         self.assertEqual(expected_hours, self.time.hours)
     
+    def test_invalid_type(self) -> None:
+        '''
+
+        '''
+        expected_hours: int = 0
+        error_message: str = 'Error: Must enter an integer.'
+        with self.assertRaises(Exception) as context:
+            self.time.hours = 'Not an integer'
+            self.assertTrue(error_message in context.exception) #type: ignore
+        self.assertEqual(
+            first=expected_hours,
+            second=self.time.hours
+        )
     
     def test_minutes_normal(self) -> None:
         '''

@@ -28,6 +28,10 @@ class Time(object):
         '''
 
         '''
+        # Validate input is type int
+        if not isinstance(hours, type(1)):
+            raise Exception('Error: Must enter an integer.')
+
         # Validate hours to be between 0 & 23
         if hours > 23:
             hours = 23
@@ -54,6 +58,11 @@ class Time(object):
         '''
 
         '''
+
+        # Validate input is type int
+        if not isinstance(minutes, type(1)):
+            raise Exception('Error: Must enter an integer.')
+
         if minutes > 59:
             minutes = 59
         elif minutes < 0:
@@ -79,6 +88,10 @@ class Time(object):
         '''
 
         '''
+        # Validate is type int
+        if not isinstance(seconds, type(1)):
+            raise Exception('Error: Must enter an integer.')
+
         if seconds > 59:
             seconds = 59
         elif seconds < 0:
