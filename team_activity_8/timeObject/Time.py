@@ -19,7 +19,7 @@ class Time(object):
         '''
 
         '''
-        return 0
+        return self.hours - 12 if self.period == 'PM' else self.hours
     
     @hours_simple.setter
     def hours_simple(self, hours_simple: int) -> None:
@@ -38,9 +38,16 @@ class Time(object):
         else:
             # Do nothing
             pass
+        
+        # Synchronize self.hours_simple and self.hours
+        if self.hours != hours_simple and self.period == 'AM':
+            self.hours = hours_simple
+        elif self.hours != hours_simple and self.period == 'PM':
+            self.hours = hours_simple + 12
+        else:
+            # Do nothing
+            pass
 
-        am: bool = True if self.period == 'AM' else False
-    
     @property
     def period(self) -> str:
         '''
@@ -59,7 +66,7 @@ class Time(object):
 
         # Validate that it is a valid variant of 'AM' or 'PM'
         if not period.lower() == 'am' and not period.lower() == 'pm':
-            raise Exception('Error: Must be AM or PM.')
+            raise Exception('Error: Must bnot  or PM.')
 
         # Determine if in the AM hours. If in the am hours and
         # wanting to switch to PM, then add half of the total seconds

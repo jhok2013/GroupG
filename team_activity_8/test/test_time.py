@@ -527,5 +527,61 @@ class test_time(unittest.TestCase):
             second=self.time.hours
         )
 
+    def test_invalid_hour_simple_type(self) -> None:
+        '''
+
+        '''
+        expected_simple_hours: int = 0
+        bad_simple_hours: str = 'Not a number'
+        error_message: str = 'Error: Must enter an integer.'
+        with self.assertRaises(Exception) as context:
+            self.time.hours_simple = expected_simple_hours
+            self.assertTrue(error_message in context.exception) #type: ignore
+        self.assertEqual(
+            first=expected_simple_hours,
+            second=self.time.hours_simple
+        )
+    
+    def test_hours_simple_normal(self) -> None:
+        '''
+
+        '''
+        # Arrange
+        normal_period: str = 'PM'
+        normal_hours: int = 23
+        normal_minutes: int = 59
+        normal_seconds: int = 59
+        normal_hours_simple: int = 11
+        expected_period: str = 'PM'
+        expected_hours: int = 23
+        expected_minutes: int = 59
+        expected_seconds: int = 59
+        expected_hours_simple: int = 11
+
+        # Act
+        self.time.hours = normal_hours
+        self.time.minutes = normal_minutes
+        self.time.seconds = normal_seconds
+        self.time.period = normal_period
+        self.time.hours_simple = normal_hours_simple
+
+        # Assert
+        self.assertEqual(
+            first=[
+                expected_hours,
+                expected_minutes,
+                expected_seconds,
+                expected_period,
+                expected_hours_simple
+            ],
+            second=[
+                self.time.hours,
+                self.time.minutes,
+                self.time.seconds,
+                self.time.period,
+                self.time.hours_simple
+            ]
+        )
+
 if __name__ == '__main__':
     unittest.main()
